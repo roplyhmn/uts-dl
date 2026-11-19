@@ -9,7 +9,7 @@ import argparse
 
 from kode.common import add_common_args, resolve_paths, set_seed
 
-PRED_FILE = "prediksi_kelas.csv"   # TODO(Alief): sesuaikan dengan nama di soal Task 1
+PRED_FILE = "prediksi_klasifikasi.csv"   # header wajib: id_unit,kelas
 
 
 def run(args):

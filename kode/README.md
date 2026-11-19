@@ -35,4 +35,4 @@ Per task juga bisa dijalankan sendiri: `python -m kode.task2.main --debug`.
 python -m kode.validasi_csv
 ```
 Mengecek header, jumlah baris = jumlah unit/sampel test, id lengkap & unik, rentang nilai
-(RUL 0–150, cluster integer). `run_all.py` menjalankannya otomatis di akhir.
+(kelas Task 1 valid, RUL 0–150, cluster integer). `run_all.py` menjalankannya otomatis di akhir.

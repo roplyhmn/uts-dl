@@ -25,12 +25,19 @@ def _ids_task3(data_dir):
     return set(pd.read_csv(Path(data_dir) / DATA_FILES["task3_meta"], usecols=["id_sampel"]).id_sampel)
 
 
+def _ids_task1(data_dir):
+    return set(pd.read_csv(Path(data_dir) / DATA_FILES["task1_test_meta"], usecols=["id_unit"]).id_unit)
+
+
+KELAS_TASK1 = {"normal", "gores", "noda", "retak", "gelembung", "las_dingin", "kontaminasi"}
+
 SPECS = {
+    "prediksi_klasifikasi.csv": dict(cols=["id_unit", "kelas"], id_col="id_unit", ids=_ids_task1,
+                                     val_col="kelas", categories=KELAS_TASK1),
     "prediksi_rul.csv": dict(cols=["id_unit", "rul"], id_col="id_unit", ids=_ids_task2,
                              val_col="rul", vmin=0, vmax=150, integer=False),
     "cluster.csv": dict(cols=["id_sampel", "cluster"], id_col="id_sampel", ids=_ids_task3,
                         val_col="cluster", vmin=None, vmax=None, integer=True),
-    # TODO(Alief): tambahkan spesifikasi CSV Task 1 di sini
 }
 
 
@@ -52,6 +59,13 @@ def validate(path: Path, spec: dict, data_dir) -> list[str]:
         err.append(f"{len(missing)} id hilang, contoh {sorted(missing)[:5]}")
     if extra := got_set - exp:
         err.append(f"{len(extra)} id tidak dikenal, contoh {sorted(extra)[:5]}")
+    if "categories" in spec:   # label kategorikal (Task 1)
+        col = df[spec["val_col"]]
+        if col.isna().any():
+            err.append(f"{col.isna().sum()} nilai {spec['val_col']} kosong")
+        if bad := set(col.dropna()) - spec["categories"]:
+            err.append(f"kelas tidak dikenal: {sorted(bad)[:5]}")
+        return err
     v = pd.to_numeric(df[spec["val_col"]], errors="coerce")
     if v.isna().any():
         err.append(f"{v.isna().sum()} nilai {spec['val_col']} kosong / bukan angka")

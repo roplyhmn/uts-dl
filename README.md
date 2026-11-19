@@ -2,7 +2,7 @@
 
 | Task | Topik | Penanggung jawab | Output |
 | --- | --- | --- | --- |
-| 1 | Klasifikasi cacat produk (gambar + sensor) | Alief | (lihat `kode/task1/`) |
+| 1 | Klasifikasi cacat produk (gambar + sensor) | Alief | `prediksi_klasifikasi.csv` |
 | 2 | Regresi RUL time-series | Rofly | `prediksi_rul.csv` |
 | 3 | Clustering multimodal material | Rofly | `cluster.csv` |
 
