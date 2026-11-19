@@ -1,0 +1,13 @@
+# Versi dipin untuk reproducibility. Setelah run penuh pertama di Colab, cocokkan dengan
+# outputs/env_info.json dan perbarui pin di sini bila berbeda.
+# torch/torchvision tidak dipin keras agar Colab/Kaggle memakai build CUDA bawaannya
+# (versi aktual tercatat otomatis di outputs/env_info.json).
+torch>=2.4
+torchvision>=0.19
+numpy==2.5.3
+pandas==3.0.6
+scikit-learn>=1.5
+scipy>=1.13
+matplotlib>=3.9
+umap-learn>=0.5.6
+tqdm>=4.66
